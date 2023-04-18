@@ -1,78 +1,168 @@
 <template>
-    <v-container fluid style="padding:0px" @click="navigationStateChange()">
-        <div v-if="SVOD != null" :style="{ 'background-image': 'url(' + SVOD?.custom_data.featured_img + ')' }"
-            style="background-repeat: no-repeat; background-position: center; background-size: cover; ">
+    <div v-if="phoneWidth <= 561">
+        <v-container fluid style="padding:0px" @click="navigationStateChange()">
+            <div v-if="SVOD != null" :style="{ 'background-image': 'url(' + SVOD?.custom_data.featured_img + ')' }"
+                style="background-repeat: no-repeat; background-position: center; background-size: cover; height:300px">
+                </div>
             <v-row no-gutters>
-                <v-col cols="7" class="d-flex justify-starter" :style="SidebarStyle"
-                    style="padding-top: 150px; padding-left: 100px;">
-                    <div class="d-flex flex-column justify-start align-start mb-6 pl-16">
-                        <div class="d-flex justify-between align-center justify-center">
-                            <img :src="SVOD?.content_provider_logo"
-                                style="cursor: pointer; width: 80px; height: 80px; border-radius: 50%;"
-                                @click="goToProviderPage(SVOD?.content_provider_id)">
-                            <div class="d-flex flex-column justify-start">
-                                <div class="font-weight-medium text-h3 pl-10">{{ SVOD?.content_provider_name }}</div>
-                                <div class="font-weight-medium text-h6 pl-10">{{ SVOD?.custom_data.country }}</div>
+                    <v-col class="d-flex justify-center" :style="SidebarStyle"
+                        style="padding-top: 10px;">
+                        <div class="d-flex flex-column justify-start align-start mb-6 pl-5">
+                            <div class="d-flex justify-between align-center justify-center">
+                                <img :src="SVOD?.content_provider_logo"
+                                    style="cursor: pointer; width: 80px; height: 80px; border-radius: 50%;"
+                                    @click="goToProviderPage(SVOD?.content_provider_id)">
+                                <div class="d-flex flex-column justify-start">
+                                    <div class="font-weight-medium text-h3 pl-10">{{ SVOD?.content_provider_name }}</div>
+                                    <div class="font-weight-medium text-h6 pl-10">{{ SVOD?.custom_data.country }}</div>
+                                </div>
+                            </div>
+
+                            <div class="font-weight-medium text-subtitle-2 text-left mt-10 mb-10">
+                                {{ SVOD?.content_provider_description }}
+                            </div>
+
+                            <div class="d-flex align-center" style="width: 30vw;">
+                                <div class="text-subtitle-1 round-md" style="width: 30vw; margin-right:20px">
+                                    <v-btn depressed color="white" :style="ButtonColor">
+                                        Subscribe
+                                    </v-btn>
+                                </div>
+                                <div class="d-flex align-center">
+                                    <v-img
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.website != ''"
+                                        :src="WebLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.facebook != ''"
+                                        :src="FacebookLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.instagram != ''"
+                                        :src="InstagramLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.whatsapp != ''"
+                                        :src="WhatsappLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.youtube != ''"
+                                        :src="YoutubeLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.twitter != ''"
+                                        :src="TwitterLogo" :aspect-ratio="1" width="40" height="40" />
+                                </div>
                             </div>
                         </div>
+                    </v-col>
+                </v-row>
+            <v-card v-if="SVOD != null">
+                <v-tabs v-model="tab" align-tabs="center" fixed-tabs :style="NavStyle">
+                    <v-tab value="videos">Videos</v-tab>
+                    <v-tab value="live">Live</v-tab>
+                    <v-tab value="film">Film & Series</v-tab>
+                    <v-tab value="subscription">Subscriptions & Rentals</v-tab>
+                </v-tabs>
+                <v-card-text>
+                    <v-window v-model="tab">
+                        <v-window-item value="videos">
+                            <ProviderVideo :providerId="providerId" category="video" />
+                        </v-window-item>
 
-                        <div class="font-weight-medium text-subtitle-2 text-left mt-10 mb-10">
-                            {{ SVOD?.content_provider_description }}
-                        </div>
+                        <v-window-item value="live">
+                            <ProviderVideo :providerId="providerId" category="live" />
+                        </v-window-item>
 
-                        <div class="d-flex align-center" style="width: 30vw;">
-                            <div class="text-subtitle-1 round-md" style="width: 10vw;">
-                                <v-btn depressed color="white" :style="ButtonColor">
-                                    Subscribe
-                                </v-btn>
+                        <v-window-item value="film">
+                            <ProviderTabFilmSeries :providerId="providerId" />
+                        </v-window-item>
+
+                        <v-window-item value="subscription">
+                            <ProviderSubscription :providerId="providerId" />
+                        </v-window-item>
+                    </v-window>
+                </v-card-text>
+            </v-card>
+        </v-container>
+    </div>
+    <div v-else>
+        <v-container fluid style="padding:0px" @click="navigationStateChange()">
+            <div v-if="SVOD != null" :style="{ 'background-image': 'url(' + SVOD?.custom_data.featured_img + ')' }"
+                style="background-repeat: no-repeat; background-position: center; background-size: cover; ">
+                <v-row no-gutters>
+                    <v-col cols="7" class="d-flex justify-starter" :style="SidebarStyle"
+                        style="padding-top: 150px; padding-left: 100px;">
+                        <div class="d-flex flex-column justify-start align-start mb-6 pl-16">
+                            <div class="d-flex justify-between align-center justify-center">
+                                <img :src="SVOD?.content_provider_logo"
+                                    style="cursor: pointer; width: 80px; height: 80px; border-radius: 50%;"
+                                    @click="goToProviderPage(SVOD?.content_provider_id)">
+                                <div class="d-flex flex-column justify-start">
+                                    <div class="font-weight-medium text-h3 pl-10">{{ SVOD?.content_provider_name }}</div>
+                                    <div class="font-weight-medium text-h6 pl-10">{{ SVOD?.custom_data.country }}</div>
+                                </div>
                             </div>
-                            <div class="d-flex align-center">
-                                <v-img v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.website != ''" :src="WebLogo" :aspect-ratio="1"
-                                    width="40" height="40" />
-                                <v-img class="ml-2" v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.facebook != ''" :src="FacebookLogo"
-                                    :aspect-ratio="1" width="40" height="40" />
-                                <v-img class="ml-2" v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.instagram != ''"
-                                    :src="InstagramLogo" :aspect-ratio="1" width="40" height="40" />
-                                <v-img class="ml-2" v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.whatsapp != ''" :src="WhatsappLogo"
-                                    :aspect-ratio="1" width="40" height="40" />
-                                <v-img class="ml-2" v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.youtube != ''" :src="YoutubeLogo"
-                                    :aspect-ratio="1" width="40" height="40" />
-                                <v-img class="ml-2" v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.twitter != ''" :src="TwitterLogo"
-                                    :aspect-ratio="1" width="40" height="40" />
+
+                            <div class="font-weight-medium text-subtitle-2 text-left mt-10 mb-10">
+                                {{ SVOD?.content_provider_description }}
+                            </div>
+
+                            <div class="d-flex align-center" style="width: 30vw;">
+                                <div class="text-subtitle-1 round-md" style="width: 10vw;">
+                                    <v-btn depressed color="white" :style="ButtonColor">
+                                        Subscribe
+                                    </v-btn>
+                                </div>
+                                <div class="d-flex align-center">
+                                    <v-img
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.website != ''"
+                                        :src="WebLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.facebook != ''"
+                                        :src="FacebookLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.instagram != ''"
+                                        :src="InstagramLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.whatsapp != ''"
+                                        :src="WhatsappLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.youtube != ''"
+                                        :src="YoutubeLogo" :aspect-ratio="1" width="40" height="40" />
+                                    <v-img class="ml-2"
+                                        v-if="SVOD?.custom_data.social_media && SVOD?.custom_data.social_media.twitter != ''"
+                                        :src="TwitterLogo" :aspect-ratio="1" width="40" height="40" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </v-col>
-            </v-row>
-        </div>
-        <v-card v-if="SVOD != null">
-            <v-tabs v-model="tab" align-tabs="center" fixed-tabs :style="NavStyle">
-                <v-tab value="videos">Videos</v-tab>
-                <v-tab value="live">Live</v-tab>
-                <v-tab value="film">Film & Series</v-tab>
-                <v-tab value="subscription">Subscriptions & Rentals</v-tab>
-            </v-tabs>
-            <v-card-text>
-                <v-window v-model="tab">
-                    <v-window-item value="videos">
-                        <ProviderVideo :providerId="providerId" category="video"/>
-                    </v-window-item>
+                    </v-col>
+                </v-row>
+            </div>
+            <v-card v-if="SVOD != null">
+                <v-tabs v-model="tab" align-tabs="center" fixed-tabs :style="NavStyle">
+                    <v-tab value="videos">Videos</v-tab>
+                    <v-tab value="live">Live</v-tab>
+                    <v-tab value="film">Film & Series</v-tab>
+                    <v-tab value="subscription">Subscriptions & Rentals</v-tab>
+                </v-tabs>
+                <v-card-text>
+                    <v-window v-model="tab">
+                        <v-window-item value="videos">
+                            <ProviderVideo :providerId="providerId" category="video" />
+                        </v-window-item>
 
-                    <v-window-item value="live">
-                        <ProviderVideo :providerId="providerId" category="live"/>
-                    </v-window-item>
+                        <v-window-item value="live">
+                            <ProviderVideo :providerId="providerId" category="live" />
+                        </v-window-item>
 
-                    <v-window-item value="film"> 
-                        <ProviderTabFilmSeries :providerId="providerId"/>
-                    </v-window-item>
+                        <v-window-item value="film">
+                            <ProviderTabFilmSeries :providerId="providerId" />
+                        </v-window-item>
 
-                    <v-window-item value="subscription"> 
-                        <ProviderSubscription :providerId="providerId" />
-                    </v-window-item>
-                </v-window>
-            </v-card-text>
-        </v-card>
-    </v-container>
+                        <v-window-item value="subscription">
+                            <ProviderSubscription :providerId="providerId" />
+                        </v-window-item>
+                    </v-window>
+                </v-card-text>
+            </v-card>
+        </v-container>
+    </div>
 </template> 
       
 <style scoped lang="scss">
@@ -113,12 +203,13 @@ import { devMode } from '../../utils/devConfig';
 export default {
     name: 'SVODAcess',
     components: {
-    ProviderVideo,
-    ProviderTabFilmSeries,
-    ProviderSubscription
-},
+        ProviderVideo,
+        ProviderTabFilmSeries,
+        ProviderSubscription
+    },
     data() {
         return {
+            phoneWidth: window.innerWidth,
             FacebookLogo: FacebookLogo,
             InstagramLogo: InstagramLogo,
             TwitterLogo: TwitterLogo,

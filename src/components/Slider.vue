@@ -272,7 +272,7 @@ export default {
 
 </script>
 <style>
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 561px) {
     .film-title {
         margin-top: 60px !important;
         margin-left: 30px !important;

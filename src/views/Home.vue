@@ -124,7 +124,7 @@ export default ({
 
 </script>
 <style>
-	@media screen and (max-width: 560px) {
+	@media screen and (max-width: 561px) {
 		#cards_all {
 			padding: 0 0 0 20px !important;
 		}

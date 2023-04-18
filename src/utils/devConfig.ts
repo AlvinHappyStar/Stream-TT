@@ -1,4 +1,4 @@
-export const devMode = false;
+export const devMode = true;
 
 // function selectAccount() {
 // 	/**

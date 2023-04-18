@@ -1,5 +1,5 @@
 <template>
-    <div v-if="phoneWidth <= 560">
+    <div v-if="phoneWidth <= 561">
         <div class="d-flex" v-if="this.getPackage && this.getPackage.length > 0"
             style="margin: 10px; flex-direction:column" @click="navigationStateChange()">
             <v-img :src="isDev ? CardVod : this.packageObj[0].package_image" width="400" style="border-radius: 10px;"></v-img>

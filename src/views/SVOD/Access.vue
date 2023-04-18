@@ -1,6 +1,6 @@
 <template>
     <v-container fluid style="padding:0px" @click="navigationStateChange()">
-        <div v-if="phoneWidth <= 560">
+        <div v-if="phoneWidth <= 561">
             <v-row no-gutters>
                 <div v-if="SVOD" :style="{ 'background-image': 'url(' + (isDev?SliderImage:encodeURI(SVOD?.wide_poster_url)) + ')' }" 
                     style="background-repeat: no-repeat; background-attachment:local; background-position:center; background-size:cover; width: 100%; height:500px">

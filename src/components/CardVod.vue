@@ -381,7 +381,7 @@ export default {
         opacity: 0.5;
     }
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 561px) {
     .v-img__img--cover {
         z-index: -1;
         top: 0;

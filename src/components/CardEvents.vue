@@ -205,7 +205,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 561px) {
     .event-vod-img {
         width: 400px !important;
         height: 225px !important;
