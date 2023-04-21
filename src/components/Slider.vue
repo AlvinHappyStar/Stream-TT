@@ -92,8 +92,8 @@
                 </div> -->
                 <!-- <div v-else style="width: 100vw; height:56.4vw;"> -->
                 <v-sheet color="transparent" height="100%" tile>
-                    <v-row class="d-flex flex-column fill-height" align="left" justify="center">
-                        <v-col cols="12" class="pa-16 ml-12 preview-scene">
+                    <v-row class="d-flex flex-column fill-height" align="center" justify="center">
+                        <v-col cols="12" class="mb-3 preview-scene">
                             <div class="d-flex justify-start mb-3 film-title">
                                 <img v-if="item.titleImage" :src="item.titleImage" style="width: 16vw; " class="img-title">
                                 <h4 v-else class="text-h3 font-weight-black text-left" id="film_subject">{{ item.title }}</h4>
@@ -286,8 +286,8 @@ export default {
     }
     
     .preview-scene {
-        margin-top: 350px !important;
-        margin-left: 100px !important;
+        margin-top: 100px !important;
+        
         
     }
     .carousel_first {

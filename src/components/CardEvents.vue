@@ -218,7 +218,7 @@ export default {
         max-width: 200px !important;
     }
     .short_name {
-        max-width: 340px !important;
+        
         font-size: 22px !important;
     }
     .date-size {
