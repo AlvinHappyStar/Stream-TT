@@ -18,7 +18,7 @@
                                     </v-icon>
                                     Access Options
                                 </v-btn>
-                        <div class="d-flex flex-column justify-flex-left align-left mb-6">
+                        <div class="d-flex flex-column justify-flex-left align-left px-5 py-5">
                             <div class="font-weight-medium text-h3 mb-10">{{ SVOD?.name_short }}</div>
                             <div class="font-weight-medium text-subtitle-2 text-left pl-1 mb-10">
                                 {{ SVOD?.description }}
@@ -39,8 +39,7 @@
                                 <div class="font-weight-medium text-left text-subtitle-2">{{ this.setRuntime(SVOD?.duration) }}</div>
                             </div>
 
-                            <div class="font-weight-medium text-subtitle-2 pl-1 mb-2">{{ SVOD?.content_rating }} - {{ SVOD?.year }} ({{
-                                SVOD?.country }}) - {{ SVOD?.genre }} - {{ SVOD?.duration }}m</div>
+                            <div class="font-weight-medium text-subtitle-2 pl-1 mb-2">Year: {{ SVOD?.year }} </div>
                             <div class="pl-1 mt-16 d-flex justify-starter align-start">
                                 <img :src="SVOD?.content_provider_logo" style="cursor: pointer; width: 60px; height: 60px; border-radius: 50%;" @click="goToProviderPage(SVOD?.content_provider_id)">
                                 <div class="content-provider-name font-weight-medium text-h6 ml-2 mr-5" @click="goToProviderPage(SVOD?.content_provider_id)" style="cursor: pointer">{{ SVOD?.content_provider_name }}</div>
@@ -115,8 +114,7 @@
                                 <div class="font-weight-medium text-left text-subtitle-2">{{ this.setRuntime(SVOD?.duration) }}</div>
                             </div>
 
-                            <div class="font-weight-medium text-subtitle-2 pl-10 mb-2">{{ SVOD?.content_rating }} - {{ SVOD?.year }} ({{
-                                SVOD?.country }}) - {{ SVOD?.genre }} - {{ SVOD?.duration }}m</div>
+                            <div class="font-weight-medium text-subtitle-2 pl-10 mb-2">Year: {{ SVOD?.year }} </div>
                             <div class="pl-10 mt-16 d-flex justify-starter align-center">
                                 <img :src="SVOD?.content_provider_logo" style="cursor: pointer; width: 60px; height: 60px; border-radius: 50%;" @click="goToProviderPage(SVOD?.content_provider_id)">
                                 <div class="content-provider-name font-weight-medium text-h6 ml-2 mr-5" @click="goToProviderPage(SVOD?.content_provider_id)" style="cursor: pointer">{{ SVOD?.content_provider_name }}</div>

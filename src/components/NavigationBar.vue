@@ -60,14 +60,16 @@ import {
     SIDEEFFECTBAR_3,
     SIDEEFFECTBAR_4
 } from '@/mainConfig'
+import { translate } from 'element-plus';
 export default {
     data: () => ({
         isOverLeave: false,
         currentRoute: '',
         backgroundStyle_show: {
             background: 'linear-gradient(90deg, ' + SIDEEFFECTBAR_1 + ' 0%, ' + SIDEEFFECTBAR_2 + ' 53%, ' + SIDEEFFECTBAR_3 + ' 86%, ' + SIDEEFFECTBAR_4 + ' 100%)',
-            width: '30vw',
-            paddingRight: '10vw'
+            width: '450px',
+            paddingRight: '10vw',
+            transform: 'translateX(0%)!important'
         },
         backgroundStyle_hide: {
             background: 'transparent',

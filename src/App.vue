@@ -3,7 +3,7 @@
 		<!-- <v-app-bar>
 			<NavBar /> 
 		</v-app-bar> -->
-		<TopBar class="mt-5" @showModal="onShowModal" @navigationChange="changeNavigationState"/>
+		<TopBar class="py-3" @showModal="onShowModal" @navigationChange="changeNavigationState"/>
 		<v-main style="--v-layout-left:0px;--v-layout-top:0px;">
 			<NavigationBar></NavigationBar>
 			<router-view />

@@ -21,7 +21,7 @@
                         value="50"
                     ></v-progress-linear>  -->
                 </div>
-                <div class="d-flex justify-start">
+                <div class="d-flex justify-start align-center">
                     <v-avatar
                         size="80" 
                         class="mt20"

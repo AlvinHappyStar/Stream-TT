@@ -7,14 +7,14 @@
     </v-row>
 
     <v-row v-for="(category, i) in Categories">
-      <v-col cols="6" md="6">
+      <v-col cols="12" md="6">
         <h4 class="text-left ml-10 fcw description-all">{{ category.categoryName }}</h4>
       </v-col>
-      <v-col cols="6" md="6" class="d-flex flex-row-reverse pr-8 view-more">
+      <v-col cols="6" md="6" class="d-none d-md-flex flex-row-reverse pr-8 view-more">
         <img class="ml-10 fcw" :src="ViewMoreButton" :style="viewMoreButtonStyle"
           @click="goToCategoryPage(category.menuCategoryIds, category.menuContentType)" />
       </v-col>
-      <v-col cols="12" md="12" style="padding: 0 0 0 87px" id="cards_all">
+      <v-col cols="12" md="12" style="padding: 0 0 0 0;" id="cards_all">
         <CardEvents :categoryId=category.menuCategoryIds v-if="category.menuContentType == 'LIVE_EVENTS'" />
         <CardLive :categoryId=category.menuCategoryIds v-if="category.menuContentType == 'LIVE_CHANNEL'" />
         <CardVod :categoryId=category.menuCategoryIds v-if="category.menuContentType == 'SVOD'" />
@@ -24,6 +24,7 @@
     </v-row>
   </v-container>
 </template>
+
 
 <script >
 
@@ -124,17 +125,19 @@ export default ({
 
 </script>
 <style>
+body{
+  overflow: hidden;
+}
 	@media screen and (max-width: 561px) {
 		#cards_all {
-			padding: 0 0 0 20px !important;
+			/* padding: 0 0 0 -20px !important; */
 		}
 	
 		.view-more {
 			visibility: hidden;
 		}
 		.description-all {
-			width: 350px !important;
-			font-size: 23px !important;
+			font-size: 16px !important;
 			
 		}
 	}

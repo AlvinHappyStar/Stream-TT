@@ -1,70 +1,73 @@
 <template>
     <v-container fluid style="padding:0px" @click="navigationStateChange()">
         <div v-if="phoneWidth <= 561">
-                <div v-if="SVOD" :style="{ 'background-image': 'url(' + encodeURI(SVOD?.backdrop) + ')' }"
+            <div v-if="SVOD" :style="{ 'background-image': 'url(' + encodeURI(SVOD?.backdrop) + ')' }"
                 style="background-repeat: no-repeat; background-attachment: local; background-position: center; background-size: cover; height:300px">
-                </div>
-            
-                <v-row no-gutters>                    
+            </div>
 
-                    <v-col  class="d-flex justify-flex-center " :style="SidebarStyle"
-                        style="width:100vw; background:none; margin-top:20px">
-                        <div style="display:flex; align-items:center; flex-direction:column; width:100vw">
-                            <div class="d-flex flex-column justify-start align-start mb-6">
-                                <div class="font-weight-medium text-h3 pl-5 pr-5 mb-10">{{ SVOD?.name_short }}</div>
-                                <div class="font-weight-medium text-subtitle-2 text-left pl-5 pr-5  mb-10">
-                                    {{ SVOD?.description }}
-                                </div>
+            <v-row no-gutters>
 
-                                <div class="pl-5 pr-5  mt-2 d-flex justify-starter align-center">
-                                    <img :src="SVOD?.content_provider_logo"
-                                        style="cursor: pointer; width: 60px; height: 60px; border-radius: 50%;"
-                                        @click="goToProviderPage(SVOD?.content_provider_id)">
-                                    <div class="content-provider-name font-weight-medium text-h6 ml-2"
-                                        @click="goToProviderPage(SVOD?.content_provider_id)" style="cursor: pointer">{{
-                                            SVOD?.content_provider_name }}</div>
-                                </div>
-
-                                <div class="d-flex justify-starter align-center pl-5 pr-5  mt-16" style="padding-bottom: 50px;">
-                                    <CustomSelect :options="seasons" style="width: 150px;" @input="changeItem($event)" />
-                                    <v-btn v-if="SVOD?.package_status == false"
-                                        class="d-flex justify-flex-end align-center pr-4 ml-6 font-weight-medium text-h6"
-                                        style="background: hsl(242deg 2% 5%);" @click="onShowAccessOptions()">
-                                        <v-icon
-                                            style="font-size:34px;border-radius:50%;padding:28px;margin-right:12px;margin-left: -24px; z-index: 9999;"
-                                            :style="ButtonColor">
-                                            mdi-currency-usd
-                                        </v-icon>
-                                        Access Options
-                                    </v-btn>
-                                </div>
-                                
+                <v-col class="d-flex justify-flex-center " :style="SidebarStyle"
+                    style="width:100vw; background:none; margin-top:20px">
+                    <div style="display:flex; align-items:center; flex-direction:column; width:100vw">
+                        <div class="d-flex flex-column justify-start align-start px-5 py-5">
+                            <div class="font-weight-medium text-h3 pl-3 pr-2 mb-10">{{ SVOD?.name_short }}</div>
+                            <div class="font-weight-medium text-subtitle-2 text-left pl-3 pr-2  mb-10">
+                                {{ SVOD?.description }}
                             </div>
 
-                            <div @click="episodeClick(SVOD?.package_status, episode.id)" v-for="(episode, i) of episodes"
-                                    class="episode-item d-flex justify-center align-center ml-5 mr-5  px-5 py-3 mb-10" :style="SubItemStyle">
-                                    <img :src="episode.icon_url" style="width: 30vw; border-radius: 25px;">
-                                    <div class="d-flex flex-column justify-start align-start">
-                                        <div class="font-weight-medium text-h5 pl-10 mb-5">{{ episode.caption }}</div>
-                                        <div class="font-weight-medium text-subtitle-2 text-left pl-10">
-                                            {{ episode.description }}
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="pl-3 pr-2  mt-2 d-flex justify-starter align-center">
+                                <img :src="SVOD?.content_provider_logo"
+                                    style="cursor: pointer; width: 60px; height: 60px; border-radius: 50%;"
+                                    @click="goToProviderPage(SVOD?.content_provider_id)">
+                                <div class="content-provider-name font-weight-medium text-h6 ml-2"
+                                    @click="goToProviderPage(SVOD?.content_provider_id)" style="cursor: pointer">{{
+                                        SVOD?.content_provider_name }}</div>
+                            </div>
+
+                            <div class="d-flex justify-starter align-center pl-2 mt-16" style="padding-bottom: 50px;">
+                                <CustomSelect :options="seasons" style="width: 130px;" @input="changeItem($event)" />
+                                <v-btn v-if="SVOD?.package_status == false"
+                                    class="d-flex justify-flex-end align-center pr-2 ml-3 font-weight-medium text-h6"
+                                    style="background: hsl(242deg 2% 5%);" @click="onShowAccessOptions()">
+                                    <v-icon
+                                        style="font-size:34px;border-radius:50%;padding:24px;margin-right:12px;margin-left: -24px; z-index: 1234;"
+                                        :style="ButtonColor">
+                                        mdi-currency-usd
+                                    </v-icon>
+                                    Access Options
+                                </v-btn>
+                            </div>
+
                         </div>
-                    </v-col>
-                    
-                </v-row>
+
+                        <div @click="episodeClick(SVOD?.package_status, episode.id)" v-for="(episode, i) of episodes"
+                            class="episode-item d-flex justify-center align-center ml-5 mr-5  px-5 py-3 mb-10"
+                            :style="SubItemStyle">
+                            <div class="d-flex flex-column justify-center align-center">
+                                <div class="d-flex justify-start align-start">
+                                    <img :src="episode.icon_url" style="width: 30vw; border-radius: 25px;">
+                                    <div class="font-weight-medium text-h5 pl-5 mb-5">{{ episode.caption }}</div>
+                                </div>
+                                <div class="font-weight-medium text-subtitle-2 text-left pl-10">
+                                    {{ episode.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </v-col>
+
+            </v-row>
         </div>
         <div v-else>
             <div v-if="SVOD" :style="{ 'background-image': 'url(' + encodeURI(SVOD?.backdrop) + ')' }"
                 style="background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover; ">
                 <v-row no-gutters>
-                    <v-col cols="6" class="d-flex justify-center left-side-content pl-5" :style="SidebarStyle"
-                        style="padding-top: 150px;">
-                        <div class="d-flex flex-column justify-start align-start pl-16 mb-6">
+                    <v-col cols="6" class="d-flex justify-center left-side-content pl-2" :style="SidebarStyle"
+                        style="padding-top: 150px">
+                        <div class="d-flex flex-column justify-start align-start pl-2 mb-6" style="width:40vw">
                             <div class="font-weight-medium text-h3 pl-10 mb-10">{{ SVOD?.name_short }}</div>
-                            <div class="font-weight-medium text-subtitle-2 text-left pl-10 mb-10">
+                            <div class="font-weight-medium text-subtitle-2 text-left pl-5 mb-10">
                                 {{ SVOD?.description }}
                             </div>
 
@@ -161,38 +164,34 @@
             </v-card-title>
             <v-card-text>
                 <div class="d-flex flex-column mb-2">
-                    <v-btn 
-                        v-if="selected_episode.vod_trailer_ott_url != ''"
-                        @click="showTrailerModal(selected_episode.id, selected_episode.vod_trailer_ott_url)"
-                        rounded="lg" class="font-weight-medium mt-2"
+                    <v-btn v-if="selected_episode.vod_trailer_ott_url != ''"
+                        @click="showTrailerModal(selected_episode.id, selected_episode.vod_trailer_ott_url)" rounded="lg"
+                        class="font-weight-medium mt-2"
                         style="background: hsl(0deg 0% 89.76%); color: #222222; font-size: 16px;text-transform: initial;">
                         <div class="d-flex justify-space-around align-center">
                             <v-label text="Play Trailer"
                                 style="opacity: 1; width: 300px; cursor: pointer; font-weight: 600; font-size: 16px;" />
-                            <v-icon icon="mdi-play" :style="playButtonColor"/>
+                            <v-icon icon="mdi-play" :style="playButtonColor" />
                         </div>
                     </v-btn>
 
-                    <v-btn 
-                        v-if="selected_episode.resume > 0"   
-                        @click="resumeMovie(selected_episode.id ,selected_episode.resume)"
-                        rounded="lg" class="font-weight-medium mt-2"
+                    <v-btn v-if="selected_episode.resume > 0"
+                        @click="resumeMovie(selected_episode.id, selected_episode.resume)" rounded="lg"
+                        class="font-weight-medium mt-2"
                         style="background: hsl(0deg 0% 89.76%); color: #222222; font-size: 14px;text-transform: initial;">
                         <div class="d-flex justify-space-around align-center">
                             <v-label text="Resume Play"
                                 style="opacity: 1; width: 300px; cursor: pointer; font-weight: 600; font-size: 16px;" />
-                            <v-icon icon="mdi-play" :style="playButtonColor"/>
+                            <v-icon icon="mdi-play" :style="playButtonColor" />
                         </div>
                     </v-btn>
 
-                    <v-btn 
-                        @click="moviePlay(selected_episode.id)"
-                        rounded="lg" class="font-weight-medium mt-2"
+                    <v-btn @click="moviePlay(selected_episode.id)" rounded="lg" class="font-weight-medium mt-2"
                         style="background: hsl(0deg 0% 89.76%); color: #222222; font-size: 14px;text-transform: initial;">
                         <div class="d-flex justify-space-around align-center">
                             <v-label text="Play from beginning"
                                 style="opacity: 1; width: 300px; cursor: pointer; font-weight: 600; font-size: 16px;" />
-                            <v-icon icon="mdi-play" :style="playButtonColor"/>
+                            <v-icon icon="mdi-play" :style="playButtonColor" />
                         </div>
                     </v-btn>
 
@@ -200,19 +199,17 @@
             </v-card-text>
         </v-card>
     </v-dialog>
-    <v-dialog
-        v-model="trailerDialog"
-        persistent
-        max-width="900"
-    >
+    <v-dialog v-model="trailerDialog" persistent max-width="900">
         <v-card class="rounded-lg">
             <v-card-title class="text-h5 pl-10 pt-8 pb-5">
-                <v-icon aria-hidden="false" class="float-right" style="cursor: pointer;margin-top: -4px;" @click="onDismissModal">
+                <v-icon aria-hidden="false" class="float-right" style="cursor: pointer;margin-top: -4px;"
+                    @click="onDismissModal">
                     mdi-close-circle-outline
                 </v-icon>
-            </v-card-title> 
+            </v-card-title>
             <v-card-text class="d-flex justify-center align-center">
-                <VideoPlayer v-if="trailer_url != ''" :options="{ autoPlay: true, controls: false, preload: 'auto', loop: true, muted: false, sources: [{ src: trailer_url }] }" />
+                <VideoPlayer v-if="trailer_url != ''"
+                    :options="{ autoPlay: true, controls: false, preload: 'auto', loop: true, muted: false, sources: [{ src: trailer_url }] }" />
             </v-card-text>
         </v-card>
     </v-dialog>
@@ -335,11 +332,11 @@ export default {
         showTrailerModal(id, trailer_url) {
             this.trailer_url = encodeURI(trailer_url);
             this.trailerDialog = true;
-        }, 
+        },
         onDismissModal() {
             this.trailer_url = '';
             this.trailerDialog = false;
-        },  
+        },
         changeItem(id) {
             for (var i = 0; i < this.items.length; i++) {
                 if (id == this.items[i].id) {
@@ -349,19 +346,19 @@ export default {
             }
         },
         episodeClick(package_status, id) {
-            if(package_status) {
+            if (package_status) {
                 for (var i = 0; i < this.episodes.length; i++) {
                     if (id == this.episodes[i].id) {
                         this.selected_episode = this.episodes[i];
                         this.episode_caption = this.episodes[i].caption;
                     }
                 }
-            
+
                 this.episodeDialog = true;
             } else {
                 this.onShowAccessOptions();
             }
-            
+
         },
         navigationStateChange() {
             this.$store.dispatch("changeNavigationState", false);

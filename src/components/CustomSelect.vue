@@ -46,7 +46,7 @@
           ? this.default
           : this.options.length > 0
           ? this.options[0].caption
-          : null,
+          : this.options[0].caption,
         open: false,
         BorderStyle: {
           borderColor: HIGHLIGHT_COLOR_1
