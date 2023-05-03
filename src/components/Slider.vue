@@ -101,7 +101,7 @@
                     </v-sheet>
                 </div> -->
         <!-- <div v-else style="width: 100vw; height:56.4vw;"> -->
-        <v-sheet color="transparent" height="70%" tile>
+        <v-sheet color="transparent" height="70%">
           <v-row
             class="d-flex flex-column fill-height"
             align="center"
@@ -109,7 +109,7 @@
           >
             <v-col
               cols="12"
-              class="mb-3 preview-scene d-flex flex-column align-center justify-center"
+              class="mb-3 preview-scene d-flex flex-column align-center align-md-start justify-center"
             >
               <div class="d-flex justify-start mb-3 film-title">
                 <img
@@ -327,7 +327,20 @@
   }
 </script>
 <style>
+  .v-responsive__content {
+    padding-left: 8%;
+    /* align-self: center; */
+  }
+  .v-responsive__content .v-sheet {
+    max-width: 38%;
+  }
   @media screen and (max-width: 561px) {
+    .v-responsive__content {
+      padding-left: 0%;
+    }
+    .v-responsive__content .v-sheet {
+      max-width: inherit;
+    }
     .film-title {
       margin-top: 60px !important;
       margin-left: 30px !important;
@@ -346,19 +359,19 @@
     .carousel_first {
       height: 100vw !important;
     }
-    .movie-kind {
+    /* .movie-kind {
       margin-left: 150px !important;
     }
     .play-btn {
       margin-left: 150px !important;
-    }
+    } */
     .img-title {
       width: 220px !important;
       margin-left: 40px;
     }
-    .run-time {
+    /* .run-time {
       margin-left: 120px !important;
-    }
+    } */
 
     #film_subject {
       font-size: 25px !important;
