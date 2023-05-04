@@ -238,7 +238,7 @@
 
   @media screen and (max-width: 561px) {
     .swiper-slide{
-        margin-right: 20px !important;
+        margin-right: 50px !important;
     }
     .event-vod-img {
       max-width: 100% !important;
