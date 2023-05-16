@@ -111,7 +111,9 @@
               cols="12"
               class="mb-3 preview-scene d-flex flex-column align-center align-md-start justify-center"
             >
-              <div class="d-flex justify-start mb-3 film-title">
+              <div
+                class="d-flex justify-center justify-md-start mb-3 film-title"
+              >
                 <img
                   v-if="item.titleImage"
                   :src="item.titleImage"
@@ -120,14 +122,14 @@
                 />
                 <h4
                   v-else
-                  class="text-h3 font-weight-black text-left"
+                  class="text-h3 font-weight-black text-md-left"
                   id="film_subject"
                 >
                   {{ item.title }}
                 </h4>
               </div>
               <div
-                class="text-subtitle-1 font-weight-medium text-justify mb-2 film-descrip"
+                class="text-subtitle-1 font-weight-medium text-justify mb-2 film-descrip d-none d-md-flex"
                 style="line-height: 20px"
               >
                 {{ item.description }}
@@ -147,7 +149,7 @@
                   item.movieDetail.length > 0 &&
                   item.movieDetail[0].duration
                 "
-                class="text-subtitle-1 font-weight-medium text-justify mb-2 run-time"
+                class="text-subtitle-1 font-weight-medium text-justify mb-2 run-time d-none d-md-block"
               >
                 Runtime:
                 {{
@@ -159,7 +161,7 @@
               <div class="text-h6 text-left mb-3 movie-kind">
                 {{ SliderTypeBycontentType(item.contentType) }}
               </div>
-              <div class="d-flex justify-start align-center play-btn">
+              <div class="d-none d-md-flex justify-start align-center play-btn">
                 <v-btn
                   class="d-flex justify-flex-end align-center pr-4"
                   style="background: hsl(242deg 2% 5%)"
@@ -189,6 +191,17 @@
                                         </v-icon>
                                         Tailer
                                     </v-btn> -->
+              </div>
+              <div
+                class="d-flex d-md-none justify-center align-center play-btn"
+              >
+                <v-btn
+                  class="d-flex justify-flex-end align-center pr-4"
+                  style="background: hsl(242deg 2% 5%)"
+                  @click="onGoPlayer(item.contentID, item.contentType)"
+                >
+                  Play Now
+                </v-btn>
               </div>
             </v-col>
           </v-row>
@@ -329,28 +342,32 @@
 <style>
   .v-responsive__content {
     padding-left: 8%;
-    /* align-self: center; */
   }
   .v-responsive__content .v-sheet {
     max-width: 38%;
   }
-  @media screen and (max-width: 561px) {
+
+  #film_subject{
+    font-size: clamp(1.5rem, 5vw, 3rem) !important;
+  }
+  
+  @media screen and (max-width: 960px) {
+    .v-img__img--contain {
+      object-fit: cover !important;
+    }
     .v-responsive__content {
       padding-left: 0%;
+      align-self: end;
+      margin-bottom: 50px;
     }
     .v-responsive__content .v-sheet {
       max-width: inherit;
     }
     .film-title {
-      margin-top: 60px !important;
-      margin-left: 30px !important;
+      margin-top: 40px !important;
     }
     .released-year {
       display: none !important;
-    }
-    .film-descrip {
-      display: none !important;
-      margin-left: 150px !important;
     }
 
     .preview-scene {
@@ -359,27 +376,36 @@
     .carousel_first {
       height: 100vw !important;
     }
-    /* .movie-kind {
-      margin-left: 150px !important;
-    }
+
     .play-btn {
-      margin-left: 150px !important;
-    } */
+      margin-top: 10px;
+    }
+
+    .play-btn .v-btn__content {
+      font-size: 12px;
+    }
     .img-title {
       width: 220px !important;
       margin-left: 40px;
     }
-    /* .run-time {
-      margin-left: 120px !important;
-    } */
 
     #film_subject {
-      font-size: 25px !important;
-      width: 250px !important;
-      margin-left: 80px !important;
+      padding: 0 10%;
+      line-height: 1.2;
     }
     .v-carousel__controls {
-      background: transparent !important;
+      background: #101314 !important;
+    }
+
+    .text-subtitle-1,
+    .text-h6 {
+      line-height: 1.2 !important;
+    }
+  }
+
+  @media (min-width: 800px) and (max-width: 1100px) {
+    .v-responsive__content {
+      align-self: center;
     }
   }
 </style>

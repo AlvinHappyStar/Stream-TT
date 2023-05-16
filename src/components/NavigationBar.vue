@@ -220,6 +220,6 @@
 </script>
 <style>
   .v-avatar {
-    border-radius: inherit;
+    border-radius: inherit !important;
   }
 </style>

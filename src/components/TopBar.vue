@@ -1,9 +1,11 @@
 <template>
   <v-app-bar
-    class="d-flex justify-space-between align-baseline"
+    class="d-flex justify-space-between align-baseline header"
     :style="backgroundStyle"
   >
-    <div class="d-flex justify-center justify-md-start align-items-center first-division">
+    <div
+      class="d-flex justify-center justify-md-start align-items-center first-division"
+    >
       <v-btn
         icon
         id="menu_flat_icon"
@@ -481,12 +483,20 @@
     width: 177px;
     margin-left: 50px;
   }
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 600px) {
+    header.header {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+
+    }
+  }
+  @media screen and (max-width: 800px) {
     /* #menu_flat_icon{
       position: absolute;
       left: 0;
     } */
-    .first-division{
+  
+    .first-division {
       width: 100%;
     }
     .for-responsive {
@@ -501,8 +511,18 @@
       margin-left: 0px;
       float: none;
     }
-    .streamTT img{
-      margin: 0!important;
+    .streamTT img {
+      margin: 0 !important;
+    }
+  }
+  @media (min-width: 800px) and (max-width: 1100px) {
+    #menu_hidden button {
+      font-size: 14px !important;
+      padding: 0 10px !important;
+      margin: 0 !important;
+    }
+    .streamTT {
+      margin-left: 20px;
     }
   }
 </style>

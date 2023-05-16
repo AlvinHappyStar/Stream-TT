@@ -160,10 +160,15 @@
       },
       getSlides() {
         let width = window.innerWidth
-        if (width > 572) {
-          this.slidesPerViewCnt = 7
+        if (width > 768) {
+          // Tablet portrait mode
+          this.slidesPerViewCnt = 3.8
+        } else if (width > 567) {
+          // Screen width between 567px and 768px
+          this.slidesPerViewCnt = 1.8
         } else {
-          this.slidesPerViewCnt = 2.1
+          // Screen width less than or equal to 567px
+          this.slidesPerViewCnt = 1.8
         }
         return this.slidesPerViewCnt
       },

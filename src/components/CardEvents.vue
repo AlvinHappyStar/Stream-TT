@@ -14,7 +14,7 @@
       :key="index"
       class="item no-border bg-none subscription-item"
     >
-      <div class="d-flex flex-column bg-none live-event">
+      <div class="d-flex flex-column w-100 live-event">
         <div
           style="display: relative"
           @click="onClickLiveTV(item.live_event_id)"
@@ -28,8 +28,8 @@
           </div>
         </div>
 
-        <div class="d-flex justify-start align-center">
-          <v-avatar size="40" class="avatar-img">
+        <div class="d-flex justify-start align-center live-event-content">
+          <v-avatar size="40" class="avatar-img ml-3">
             <img
               :src="item.content_provider_logo"
               style="width: 40px; height: 40px; border-radius: 50%"
@@ -37,11 +37,11 @@
             />
           </v-avatar>
           <div
-            class="d-flex flex-column text-left"
+            class="d-flex flex-column text-left mb-3"
             style="width: 100%"
             @click="onClickLiveTV(item.live_event_id)"
           >
-            <div class="d-flex justify-space-between mt-3 ml-5">
+            <div class="d-flex justify-space-between mt-3  ml-5">
               <div
                 class="d-flex flex-column fm fcw event_short_name justify-center short_name"
                 style="max-width: 300px; height: 60px; font-size: 14px"
@@ -173,11 +173,10 @@
       },
       getBetween() {
         let width = window.innerWidth
-
         if (width > 572) {
           this.between = 15
         } else {
-          this.between = 200
+          this.between = 10
         }
         return this.between
       },
@@ -236,27 +235,31 @@
     }
   }
 
-  @media screen and (max-width: 561px) {
-    .swiper-slide{
-        margin-right: 50px !important;
-    }
+  @media screen and (max-width: 600px) {
     .event-vod-img {
       max-width: 100% !important;
       height: auto !important;
-      border-radius: 4vw !important;
-      /* padding: 5px !important; */
-      /* margin-left: 50px !important; */
+      border-top-left-radius: 2vw !important;
+      border-top-right-radius: 2vw !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
     }
 
     .event_short_name {
       max-width: 200px !important;
     }
     .short_name {
-      font-size: 22px !important;
+      font-size: 16px !important;
     }
     .date-size {
-      font-size: 20px !important;
+      font-size: 16px !important;
       max-width: 350px !important;
+    }
+
+    .live-event-content{
+      background-color: lightgray;
+      border-bottom-left-radius: 2vw !important;
+      border-bottom-right-radius: 2vw !important;
     }
   }
 

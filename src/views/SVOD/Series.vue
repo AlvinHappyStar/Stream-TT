@@ -29,8 +29,15 @@
             "
           >
             <div class="d-flex flex-column justify-start align-start px-5 py-5">
-              <div class="font-weight-medium text-h3 pl-3 pr-2 mb-10">
+              <div class="font-weight-medium text-h5 pl-3 pr-2 mb-4">
                 {{ SVOD?.name_short }}
+              </div>
+              <div class="mb-4">
+                <CustomSelect
+                  :options="seasons"
+                  style="width: 130px"
+                  @input="changeItem($event)"
+                />
               </div>
               <div
                 class="font-weight-medium text-subtitle-2 text-left pl-3 pr-2 mb-10"
@@ -62,11 +69,6 @@
                 class="d-flex justify-starter align-center pl-2 mt-16"
                 style="padding-bottom: 50px"
               >
-                <CustomSelect
-                  :options="seasons"
-                  style="width: 130px"
-                  @input="changeItem($event)"
-                />
                 <v-btn
                   v-if="SVOD?.package_status == false"
                   class="d-flex justify-flex-end align-center pr-2 ml-3 font-weight-medium text-h6"
@@ -117,7 +119,6 @@
       </v-row>
     </div>
     <div v-else>
-
       <div
         v-if="SVOD"
         :style="{
